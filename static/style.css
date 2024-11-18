@@ -1,0 +1,168 @@
+/* Base styles */
+body {
+    background-color: #ffffff;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure body takes at least full height */
+}
+
+/* Navbar styling */
+nav.navbar {
+    background-color: #bee6d3; 
+    padding: 10px;
+}
+
+nav.navbar .navbar-nav {
+    display: flex;              /* Ensure navbar items are in a row */
+    gap: 5px;                  /* Adds space between navbar items */
+    margin-left: 0;             /* Ensure navbar items are aligned left */
+}
+
+.navbar-brand {
+    color: #ffffff;
+    font-size: 35px;
+}
+
+nav.navbar .navbar-brand:hover {
+    opacity: 0.8;  /* Slight opacity change on hover */
+    color: #8a9b93;
+}
+
+nav.navbar .nav-link {
+    color: #ffffff;  /* White text color for links */
+    font-size: 25px;
+    text-decoration: none;
+}
+
+nav.navbar .nav-link:hover {
+    opacity: 0.8;  /* Slight opacity change on hover */
+    color: #8a9b93;
+}
+
+/* Styling for the full name link */
+.name-link a {
+    color: black;             /* Set the link text color to black */
+    text-decoration: none;    /* Remove the underline */
+    font-size: 20px;
+}
+
+.name-link a:hover {
+    color: #8a9b93;           /* Optional: Change color on hover */
+    text-decoration: none;    /* Ensure no underline on hover */
+}
+
+/* Button styles */
+.btn-primary, .btn-success {
+    background-color: #bee6d3; 
+    border-color: #8a9b93;
+}
+
+.btn-warning {
+    background-color: #fbd38d;  
+    border-color: #fbd38d;
+}
+
+.btn-danger {
+    background-color: #fbb6ce;  
+    border-color: #fbb6ce;
+}
+
+.btn-primary:hover, .btn-warning:hover, .btn-danger:hover, .btn-success:hover {
+    opacity: 0.8;
+    background-color: #8a9b93;
+    border-color: white;
+}
+
+/* Footer Styling */
+footer {
+    background-color: #bee6d3;  /* Matches the navbar */
+    padding: 10px;
+    text-align: center;
+    margin-top: auto; /* Push footer to the bottom of the page */
+}
+
+footer p {
+    margin: 0;
+    color: #ffffff;  /* White text for footer */
+}
+
+/* General input fields styling */
+input[type="text"], input[type="url"], textarea {
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+/* Custom button styles */
+.btn-secondary {
+    background-color: #bee6d3;
+    color: #ffffff;
+    padding: 7px 10px;
+    border-radius: 5%;
+    text-decoration: none;
+}
+
+.btn-secondary:hover {
+    background-color: #8a9b93;
+}
+
+/* Ensuring proper space and rounded corners for buttons */
+.btn-group {
+    display: flex;
+    gap: 10px;  /* Adds space between buttons */
+}
+
+.btn-group .btn {
+    border-radius: 5px;  /* Rounded buttons */
+}
+
+.btn-view {
+    background-color: #bee6d3;
+    color: black;
+    padding: 7px;
+    border-radius: 5%;
+    border: none;
+    text-decoration: none;
+}
+
+.btn-edit {
+    background-color: #f9ee8d;
+    color: black;
+    padding: 7px;
+    border-radius: 5%;
+    border: none;
+    text-decoration: none;
+}
+
+.btn-delete {
+    background-color: #fa8989;
+    color: black;
+    padding: 7px;
+    border-radius: 5%;
+    border: none;
+    text-decoration: none;
+}
+
+.btn-back {
+    background-color: #bee6d3;
+    color: black;
+    padding: 7px;
+    border-radius: 5%;
+    border: none;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+.user-name {
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.user-info {
+    list-style-type: none; /* Removes the default bullet points */
+    padding-left: 0; /* Removes any default padding */
+}
+
+.list-group {
+    margin: 15px 0px;
+}
