@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+<div class="post-detail">
+    <!-- Display the title of the post -->
+    <h1>{{ post.title }}</h1>
+
+    <!-- Display the author and date the post was created -->
+    <p><strong>By {{ post.user.full_name }}</strong> on 
+    <span class="post-date">{{ post.created_at.strftime('%b %d, %Y at %I:%M %p') }}</span></p>
+
+    <!-- Display the full content of the post -->
+    <div class="post-content">
+        <p>{{ post.content }}</p>  <!-- Full content of the post -->
+    </div>
+
+    <!-- Link to go back to the list of all posts -->
+    <a href="/posts" class="btn btn-secondary">Back to Posts</a>
+
+    <!-- Post Details Section -->
+    <h2>{{ post.title }}</h2>
+    <p><strong>By:</strong> {{ post.user.first_name }} {{ post.user.last_name }}</p>
+    <p><strong>Posted on:</strong> {{ post.created_at.strftime('%b %d, %Y at %I:%M %p') }}</p>
+    <p>{{ post.content }}</p>
+
+    <!-- Delete Post Form
+    <form action="{{ url_for('delete_post', post_id=post.id) }}" method="POST">
+        <button type="submit" class="btn btn-danger">Delete Post</button>
+    </form> -->
+
+</div>
+{% endblock %}

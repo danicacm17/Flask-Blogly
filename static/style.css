@@ -1,22 +1,22 @@
-/* Base styles */
+/* General page styles */
 body {
     background-color: #ffffff;
     font-family: 'Arial', sans-serif;
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Ensure body takes at least full height */
+    min-height: 100vh; /* Ensure the body takes at least the full height of the viewport */
 }
 
-/* Navbar styling */
+/* Navbar styling: Defines layout, colors, and hover effects for the navigation bar */
 nav.navbar {
     background-color: #bee6d3; 
     padding: 10px;
 }
 
 nav.navbar .navbar-nav {
-    display: flex;              /* Ensure navbar items are in a row */
+    display: flex;              /* Ensures navbar items are in a row */
     gap: 5px;                  /* Adds space between navbar items */
-    margin-left: 0;             /* Ensure navbar items are aligned left */
+    margin-left: 0;             /* Ensures navbar items are aligned left */
 }
 
 .navbar-brand {
@@ -40,7 +40,7 @@ nav.navbar .nav-link:hover {
     color: #8a9b93;
 }
 
-/* Styling for the full name link */
+/* Styling for user name link: Manages the appearance of user name links */
 .name-link a {
     color: black;             /* Set the link text color to black */
     text-decoration: none;    /* Remove the underline */
@@ -48,11 +48,11 @@ nav.navbar .nav-link:hover {
 }
 
 .name-link a:hover {
-    color: #8a9b93;           /* Optional: Change color on hover */
+    color: #8a9b93;           /* Change color on hover */
     text-decoration: none;    /* Ensure no underline on hover */
 }
 
-/* Button styles */
+/* Button styles: Customizes the appearance of various buttons used throughout the site */
 .btn-primary, .btn-success {
     background-color: #bee6d3; 
     border-color: #8a9b93;
@@ -74,7 +74,7 @@ nav.navbar .nav-link:hover {
     border-color: white;
 }
 
-/* Footer Styling */
+/* Footer styling: Positions and styles the footer at the bottom of the page */
 footer {
     background-color: #bee6d3;  /* Matches the navbar */
     padding: 10px;
@@ -87,13 +87,13 @@ footer p {
     color: #ffffff;  /* White text for footer */
 }
 
-/* General input fields styling */
+/* Input fields styling: Defines the appearance of general input fields and textareas */
 input[type="text"], input[type="url"], textarea {
     border-radius: 5px;
     border: 1px solid #ddd;
 }
 
-/* Custom button styles */
+/* Custom button styles: Modifies the appearance of secondary buttons */
 .btn-secondary {
     background-color: #bee6d3;
     color: #ffffff;
@@ -106,7 +106,7 @@ input[type="text"], input[type="url"], textarea {
     background-color: #8a9b93;
 }
 
-/* Ensuring proper space and rounded corners for buttons */
+/* Button group styling: Ensures buttons are spaced evenly in a group */
 .btn-group {
     display: flex;
     gap: 10px;  /* Adds space between buttons */
@@ -116,10 +116,12 @@ input[type="text"], input[type="url"], textarea {
     border-radius: 5px;  /* Rounded buttons */
 }
 
+/* Specialized button styles for different actions */
 .btn-view {
     background-color: #bee6d3;
     color: black;
     padding: 7px;
+    margin: 10px 0px;
     border-radius: 5%;
     border: none;
     text-decoration: none;
@@ -129,6 +131,7 @@ input[type="text"], input[type="url"], textarea {
     background-color: #f9ee8d;
     color: black;
     padding: 7px;
+    margin: 10px 0px;
     border-radius: 5%;
     border: none;
     text-decoration: none;
@@ -138,6 +141,7 @@ input[type="text"], input[type="url"], textarea {
     background-color: #fa8989;
     color: black;
     padding: 7px;
+    margin: 10px 0px;
     border-radius: 5%;
     border: none;
     text-decoration: none;
@@ -147,17 +151,20 @@ input[type="text"], input[type="url"], textarea {
     background-color: #bee6d3;
     color: black;
     padding: 7px;
+    margin: 10px 0px;
     border-radius: 5%;
     border: none;
     text-decoration: none;
     font-size: 15px;
 }
 
+/* User name styling: Defines how user names appear within the interface */
 .user-name {
     font-size: 20px;
     text-decoration: none;
 }
 
+/* User info list styling: Removes default bullet points and padding */
 .user-info {
     list-style-type: none; /* Removes the default bullet points */
     padding-left: 0; /* Removes any default padding */
@@ -165,4 +172,58 @@ input[type="text"], input[type="url"], textarea {
 
 .list-group {
     margin: 15px 0px;
+}
+
+/* Post list styling: Formats posts displayed in a list */
+.post-item {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 1.5rem;
+}
+
+.post-title {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.post-excerpt {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.post-author {
+    font-size: 0.9rem;
+    color: #777;
+    margin-top: 15px;
+}
+
+.post-date {
+    color: #444;
+}
+
+/* "Read More" link styling: Defines the appearance of the "Read More" link */
+.read-more-link {
+    color: #000;  /* Black text */
+    font-weight: normal;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+.read-more-link:hover {
+    text-decoration: underline;  /* Underline on hover */
+    color: #8a9b93;
+}
+
+/* Custom input and textarea styling: Ensures full-width inputs with custom padding and border */
+.custom-input, .custom-textarea {
+    width: 100%; /* Make inputs and textareas full width */
+    padding: 10px;
+    font-size: 1.2rem; /* Larger text size */
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.custom-textarea {
+    height: 200px; /* Make the textarea taller */
 }

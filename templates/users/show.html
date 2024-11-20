@@ -3,32 +3,51 @@
 {% block title %}{{ user.full_name }}{% endblock %}
 
 {% block content %}
+  <!-- Page Heading for User Details -->
+  <h1>User Details</h1>
 
-<h1>User Details</h1>
+  <div class="row">
+    <!-- Display User Image if Available -->
+    {% if user.image_url %}
+      <div class="col-md-4 col-sm-12 mb-3">
+        <img src="{{ user.image_url }}" alt="{{ user.full_name }}" class="img-fluid rounded" style="max-width: 80%;">
+      </div>
+    {% endif %}
 
-<div class="row">
-  {% if user.image_url %}
-  <div class="col-sm-2 col-6">
-    <img src="{{ user.image_url }}" alt="{{ user.full_name }}" class="img-fluid">
+    <!-- User Info Section -->
+    <div class="col-md-8 col-sm-12">
+      <ul class="user-info">
+        <li class="user-name">First Name: {{ user.first_name }}</li>
+        <li class="user-name">Last Name: {{ user.last_name }}</li>
+      </ul>
+
+      <!-- Buttons for Edit, Delete, and Back -->
+      <a href="/users/{{ user.id }}/edit" class="btn btn-edit btn-sm">Edit</a>
+      <form action="/users/{{ user.id }}/delete" method="POST" style="display:inline;">
+        <button type="submit" class="btn btn-delete btn-sm">Delete</button>
+      </form>
+      <a class="btn btn-back" href="/users">Back</a>
+    </div>
   </div>
+
+  <!-- Posts Section -->
+  <h2>Posts</h2>
+  {% if posts %}
+    <!-- List of Posts if Available -->
+    <ul>
+      {% for post in posts %}
+        <li>
+          <a href="/posts/{{ post.id }}">{{ post.title }}</a> 
+          - {{ post.created_at.strftime('%b %d, %Y at %I:%M %p') }}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <!-- Message if No Posts Exist -->
+    <p>No posts yet.</p>
   {% endif %}
 
-  <div class="col-sm-10 col-12">
-
-    <ul class="user-info">
-      <li class="user-name">First Name: {{user.first_name}}</li>
-      <li class="user-name">Last Name: {{user.last_name}}</li>
-    </ul>
-
-    <a href="/users/{{ user.id }}/edit" class="btn btn-edit btn-sm">Edit</a>
-
-    <form action="/users/{{ user.id }}/delete" method="POST" style="display:inline;">
-      <button type="submit" class="btn btn-delete btn-sm">Delete</button>
-    </form>
-
-    <a class="btn btn-back" href="/users">Back</a>
-
-  </div>
-</div>
+  <!-- Button to Add a New Post -->
+  <a href="/users/{{ user.id }}/posts/new" class="btn btn-primary">Add New Post</a>
 
 {% endblock %}

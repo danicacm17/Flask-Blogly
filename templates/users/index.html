@@ -5,23 +5,25 @@
 {% block content %}
 <h1>Users</h1>
 
-<!-- Add user button at the top -->
-<a class="btn btn-primary mt-3" href="/users/new">Add New User</a>
+<!-- Add user button (currently commented out) -->
+<!-- <a class="btn btn-primary mt-3" href="/users/new">Add New User</a> -->
 
+<!-- List of Users -->
 <ul class="list-group">
   {% for user in users %}
     <li class="list-group-item d-flex justify-content-between align-items-center">
-      <span class="name-link"><a href="/users/{{ user.id }}">{{ user.full_name }}</a></span>  <!-- Display user's full name -->
+      <!-- User's full name, linked to their profile page -->
+      <span class="name-link"><a href="/users/{{ user.id }}">{{ user.full_name }}</a></span>
       
       <!-- Button group for each user -->
       <div class="btn-group">
-        <!-- View button -->
+        <!-- View button to go to the user's profile -->
         <a href="/users/{{ user.id }}" class="btn-view">View</a>
         
-        <!-- Edit button -->
+        <!-- Edit button to edit the user's information -->
         <a href="/users/{{ user.id }}/edit" class="btn-edit">Edit</a>
         
-        <!-- Delete button (with confirmation) -->
+        <!-- Delete button to remove the user (with a confirmation prompt) -->
         <form action="/users/{{ user.id }}/delete" method="POST" class="d-inline">
           <button type="submit" class="btn-delete" onclick="return confirm('Are you sure you want to delete this user?')">Delete</button>
         </form>
@@ -30,6 +32,7 @@
   {% endfor %}
 </ul>
 
+<!-- Button to navigate to the page for creating a new user -->
 <a class="btn btn-primary mt-3" href="/users/new">Add New User</a>
 
 {% endblock %}

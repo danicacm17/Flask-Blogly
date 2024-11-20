@@ -1,34 +1,51 @@
 """SQLAlchemy models for blogly."""
 
+from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
 
+# Initialize the SQLAlchemy instance
 db = SQLAlchemy()
 
+# Default image URL used for users who don't have a profile image
 DEFAULT_IMAGE_URL = "https://static.vecteezy.com/system/resources/thumbnails/005/545/335/small/user-sign-icon-person-symbol-human-avatar-isolated-on-white-backogrund-vector.jpg"
 
-
+# User model, representing a user in the system
 class User(db.Model):
-    """Site user."""
+    __tablename__ = 'users'
 
-    __tablename__ = "users"
+    # Columns for user attributes
+    id = db.Column(db.Integer, primary_key=True)  # Unique identifier for the user
+    first_name = db.Column(db.String(50), nullable=False)  # First name, required
+    last_name = db.Column(db.String(50), nullable=False)  # Last name, required
+    image_url = db.Column(db.Text, nullable=True, default=DEFAULT_IMAGE_URL)  # Set default image URL
 
-    id = db.Column(db.Integer, primary_key=True)
-    first_name = db.Column(db.Text, nullable=False)
-    last_name = db.Column(db.Text, nullable=False)
-    image_url = db.Column(db.Text, nullable=False, default=DEFAULT_IMAGE_URL)
+    # One-to-many relationship: a user can have many posts
+    posts = db.relationship('Post', backref='author', cascade='all, delete-orphan')
 
+    # Property to return the full name of the user by combining first and last name
     @property
     def full_name(self):
-        """Return full name of user."""
-
         return f"{self.first_name} {self.last_name}"
 
+# Post model, representing a blog post written by a user
+class Post(db.Model):
+    __tablename__ = 'posts'
 
+    # Columns for post attributes
+    id = db.Column(db.Integer, primary_key=True)  # Unique identifier for the post
+    title = db.Column(db.String(100), nullable=False)  # Post title, required
+    content = db.Column(db.Text, nullable=False)  # Post content, required
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)  # Timestamp when the post is created
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)  # Foreign key linking the post to a user
+
+    # One-to-many relationship: a post belongs to one user
+    user = db.relationship('User', backref='user_posts')
+
+# Function to connect the database to the provided Flask app
 def connect_db(app):
-    """Connect this database to provided Flask app.
+    """Connect this database to the provided Flask app.
 
-    You should call this in your Flask app.
+    You should call this function in your Flask app to initialize the connection.
     """
-
-    db.app = app
-    db.init_app(app)
+    db.app = app  # Associate the app with the database
+    db.init_app(app)  # Initialize the database with the app

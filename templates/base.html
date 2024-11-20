@@ -1,35 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Metadata for the webpage -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Title of the page, dynamic content for individual pages -->
   <title>Blogly &ndash; {% block title %}{% endblock %}</title>
+
+  <!-- Linking external stylesheets (Bootstrap and custom styles) -->
   <link rel="stylesheet" href="https://unpkg.com/bootstrap/dist/css/bootstrap.css">
   <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-  <!-- Navbar -->
+  <!-- Navbar (Navigation Bar) -->
   <nav class="navbar navbar-expand-lg">
     <a class="navbar-brand" href="/">Blogly</a>
     <ul class="navbar-nav">
+      <!-- Links to Home, Users, and All Posts pages -->
       <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
       <li class="nav-item"><a class="nav-link" href="/users">Users</a></li>
+      <li class="nav-item"><a class="nav-link" href="/posts">All Posts</a></li>
     </ul>
   </nav>
 
-  <!-- Main Content -->
+  <!-- Flash Messages (Displays success/error messages if present) -->
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="alert-container">
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+  {% endwith %}
+
+  <!-- Main Content Area -->
   <div class="container mt-5">
     {% block content %}
-    <!-- Content goes here -->
+      <!-- Placeholder for child templates' content -->
     {% endblock %}
   </div>
 
-  <!-- Footer -->
+  <!-- Footer (Fixed footer at the bottom of the page) -->
   <footer class="bg-turquoise text-center text-white py-3 mt-auto">
     <p>2024 Blogly</p>
   </footer>
 
-  <!-- Bootstrap JS & Dependencies -->
+  <!-- Linking to Bootstrap JavaScript and dependencies (for responsive features) -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
   <script src="https://unpkg.com/bootstrap/dist/js/bootstrap.min.js"></script>

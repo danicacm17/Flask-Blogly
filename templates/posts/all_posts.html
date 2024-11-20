@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}All Posts{% endblock %}
+
+{% block content %}
+  <!-- Page Heading: Title of the page -->
+  <h1>All Posts</h1>
+
+  <!-- List of Posts -->
+  <ul class="list-group">
+    {% for post in posts %}
+      <li class="list-group-item mb-3">
+        <!-- Post Title -->
+        <h3 class="post-title font-weight-bold">{{ post.title }}</h3>
+
+        <!-- Post Excerpt (First 55 characters of content) -->
+        <p class="post-excerpt">{{ post.content[:55] }}...</p>
+
+        <!-- Link to View the Full Post -->
+        <a href="/posts/{{ post.id }}" class="read-more-link">Read More...</a>
+
+        <!-- Post Author and Date -->
+        <p class="post-author">
+          By <strong>{{ post.user.full_name }}</strong> on 
+          <span class="post-date">{{ post.created_at.strftime('%b %d, %Y at %I:%M %p') }}</span>
+        </p>
+      </li>
+    {% endfor %}
+  </ul>
+
+{% endblock %}
