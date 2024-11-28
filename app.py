@@ -2,7 +2,7 @@
 from flask import Flask, request, redirect, render_template, flash, abort
 from flask_debugtoolbar import DebugToolbarExtension
 from flask_migrate import Migrate
-from models import db, connect_db, User, Post
+from models import db, connect_db, User, Post, Tag
 from flask_caching import Cache
 import pytz
 from datetime import datetime
@@ -128,24 +128,26 @@ def new_post(user_id):
 
     return render_template('posts/new_post.html', user=user)
 
-@app.route('/posts/<int:post_id>/edit', methods=['GET', 'POST'])
+@app.route('/posts/<int:post_id>/edit', methods=["GET", "POST"])
 def edit_post(post_id):
-    """Edit an existing post"""
     post = Post.query.get_or_404(post_id)
-
-    if request.method == 'POST':
+    tags = Tag.query.all()  # Fetch all available tags
+    if request.method == "POST":
         post.title = request.form['title']
         post.content = request.form['content']
-        
-        if not post.title or not post.content:
-            flash('Title and content are required!', 'danger')
-            return redirect(f'/posts/{post.id}/edit')
+
+        # Handle the tags
+        selected_tags = request.form.getlist('tags')  # Get list of selected tag IDs
+        post.tags = []  # Clear current tags
+        for tag_id in selected_tags:
+            tag = Tag.query.get(tag_id)
+            post.tags.append(tag)  # Associate selected tags with post
 
         db.session.commit()
-        flash('Post updated successfully!', 'success')
+        flash("Post updated successfully!")
         return redirect(f'/posts/{post.id}')
 
-    return render_template('posts/edit_post.html', post=post)
+    return render_template('posts/edit_post.html', post=post, tags=tags)
 
 @app.route('/posts/<int:post_id>/delete', methods=['POST'])
 def delete_post(post_id):
@@ -175,6 +177,42 @@ def post_detail(post_id):
     # Render the template and pass the formatted time
     return render_template('posts/post_detail.html', post=post, formatted_time=formatted_time)
 
+@app.route('/tags')
+def list_tags():
+    """Show a list of all tags."""
+    tags = Tag.query.all()  # Fetch all tags from the database
+    return render_template('tags/tags.html', tags=tags)
+
+@app.route('/tags/<int:tag_id>')
+def show_tag(tag_id):
+    tag = Tag.query.get_or_404(tag_id)
+    return render_template('tags/tag_detail.html', tag=tag)
+
+@app.route('/tags/new', methods=["GET", "POST"])
+def new_tag():
+    """Handle creating a new tag."""
+    if request.method == 'POST':
+        tag_name = request.form['name']
+        
+        # Validate the tag name
+        if not tag_name:
+            flash("Tag name is required.", "danger")
+            return redirect('/tags/new')
+        
+        # Check if the tag already exists
+        existing_tag = Tag.query.filter_by(name=tag_name).first()
+        if existing_tag:
+            flash("Tag already exists.", "danger")
+            return redirect('/tags/new')
+
+        # Create and save the new tag
+        new_tag = Tag(name=tag_name)
+        db.session.add(new_tag)
+        db.session.commit()
+        flash("Tag created successfully!", "success")
+        return redirect('/tags')
+    
+    return render_template('tags/new_tag.html')
 
 # Run the app
 if __name__ == '__main__':

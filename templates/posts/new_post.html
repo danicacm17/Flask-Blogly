@@ -19,10 +19,21 @@
       <textarea id="content" name="content" class="form-control form-control-lg" rows="6"></textarea>
     </div>
 
+    <form method="POST">
+      <!-- Other post fields -->
+      <label for="tags">Tags:</label>
+      <select name="tags" id="tags" multiple>
+          {% for tag in tags %}
+          <option value="{{ tag.id }}">{{ tag.name }}</option>
+          {% endfor %}
+      </select>
+      <button type="submit">Submit</button>
+  </form>  
+
     <!-- Submit Button to Add the Post -->
-    <button type="submit" class="btn-edit">Add Post</button>
+    <button type="submit" class="btn btn-edit">Add Post</button>
   </form>
 
   <!-- Link to go back to the User's profile page -->
-  <a href="/users/{{ user.id }}" class="btn-back">Back to User</a>
+  <a href="/users/{{ user.id }}" class="btn btn-back">Back to User</a>
 {% endblock %}

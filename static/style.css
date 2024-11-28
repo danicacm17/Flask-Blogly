@@ -155,7 +155,6 @@ input[type="text"], input[type="url"], textarea {
     border-radius: 5%;
     border: none;
     text-decoration: none;
-    font-size: 15px;
 }
 
 /* User name styling: Defines how user names appear within the interface */
@@ -227,3 +226,13 @@ input[type="text"], input[type="url"], textarea {
 .custom-textarea {
     height: 200px; /* Make the textarea taller */
 }
+
+form div {
+    margin-bottom: 15px;
+  }
+  
+  textarea, select {
+    width: 100%;
+    font-size: 1.2em;
+  }
+  

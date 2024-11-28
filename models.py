@@ -41,6 +41,24 @@ class Post(db.Model):
     # One-to-many relationship: a post belongs to one user
     user = db.relationship('User', backref='user_posts')
 
+# Tag model, representing a tag for categorizing posts
+class Tag(db.Model):
+    __tablename__ = 'tags'
+
+    id = db.Column(db.Integer, primary_key=True)  # Unique identifier for the tag
+    name = db.Column(db.String(50), unique=True, nullable=False)  # Tag name, required and unique
+
+    # Many-to-many relationship: tags associated with posts
+    posts = db.relationship('Post', secondary='post_tags', backref='tags')
+
+# PostTag model, representing the association table for Post and Tag
+class PostTag(db.Model):
+    __tablename__ = 'post_tags'
+
+    # Composite primary key using `post_id` and `tag_id`
+    post_id = db.Column(db.Integer, db.ForeignKey('posts.id'), primary_key=True)  # Foreign key to Post
+    tag_id = db.Column(db.Integer, db.ForeignKey('tags.id'), primary_key=True)  # Foreign key to Tag
+
 # Function to connect the database to the provided Flask app
 def connect_db(app):
     """Connect this database to the provided Flask app.
